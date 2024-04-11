@@ -55,11 +55,11 @@ class ProductManager {
 
   updateProducts = async ({id, ...producto}) => {
 await this.deleteProductById(id)
-let productito = await this.readProducts()
+let productOld = await this.readProducts()
 
 let productosModificados = [
 {id, ...producto},
-...productito
+...productOld
 ]
 console.log(productosModificados)
   };
@@ -77,10 +77,10 @@ const productos = new ProductManager();
 
 // productos.deleteProductById(2);
 
-productos.updateProducts(  title: 'Titulo3',
+productos.updateProducts({  title: 'Titulo3',
 description: 'Description3',
 price: 500,
 imagen: 'Imagen3',
 code: 'abc3',
 stock: 10,
-id: 3)
+id: 3})
