@@ -53,15 +53,12 @@ class ProductManager {
     console.log("Producto eliminado");
   };
 
-  updateProducts = async ({id, ...producto}) => {
-await this.deleteProductById(id)
-let productOld = await this.readProducts()
+  updateProducts = async ({ id, ...producto }) => {
+    await this.deleteProductById(id);
+    let productOld = await this.readProducts();
 
-let productosModificados = [
-{id, ...producto},
-...productOld
-]
-console.log(productosModificados)
+    let productosModificados = [{ id, ...producto }, ...productOld];
+    await fs.writeFile(this.patch, JSON.stringify(productosModificados));
   };
 }
 
@@ -77,10 +74,12 @@ const productos = new ProductManager();
 
 // productos.deleteProductById(2);
 
-productos.updateProducts({  title: 'Titulo3',
-description: 'Description3',
-price: 500,
-imagen: 'Imagen3',
-code: 'abc3',
-stock: 10,
-id: 3})
+productos.updateProducts({
+  title: "Titulo3",
+  description: "Description3",
+  price: 500,
+  imagen: "Imagen3",
+  code: "abc3",
+  stock: 10,
+  id: 3,
+});
